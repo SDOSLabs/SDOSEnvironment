@@ -5,15 +5,15 @@ import PackageDescription
 let package = Package(
     name: "SDOSEnvironment",
     platforms: [
-        .iOS("8.0")
+        .iOS(.v9)
     ],
     products: [
         .library(
             name: "SDOSEnvironment",
             targets: ["SDOSEnvironment"]),
         .executable(
-            name: "SDOSEnvironmentExecutable",
-            targets: ["SDOSEnvironmentExecutable"]
+            name: "SDOSEnvironmentScript",
+            targets: ["SDOSEnvironmentScript"]
         )
     ],
     dependencies: [
@@ -26,7 +26,10 @@ let package = Package(
                 "RNCryptor"
             ],
             path: "src/Classes/Manager"),
-        .target(name: "SDOSEnvironmentExecutable",
-                path: "Sample/SDOSEnvironment/SDOSEnvironmentScript")
+        .target(name: "SDOSEnvironmentScript",
+                dependencies: [
+                    "RNCryptor"
+                ],
+                path: "src/Scripts/Classes")
     ]
 )
