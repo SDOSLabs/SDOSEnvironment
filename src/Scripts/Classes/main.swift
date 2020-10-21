@@ -7,7 +7,7 @@
 //
 
 import Foundation
-#if canImport(RNCryptor)
+#if SWIFT_PACKAGE
 import RNCryptor
 #endif
 
