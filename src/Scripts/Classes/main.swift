@@ -7,6 +7,9 @@
 //
 
 import Foundation
+#if SWIFT_PACKAGE
+import RNCryptor
+#endif
 
 extension String {
     func lowerCaseFirstLetter() -> String {
@@ -382,25 +385,37 @@ extension ScriptAction {
 
 extension ScriptAction {
     enum TypeParams: String {
-        case INPUT
-        case OUTPUT
+        case INPUT_FILE
+        case INPUT_FILE_LIST
+        case OUTPUT_FILE
+        case OUTPUT_FILE_LIST
     }
     
     func validateInputOutput() {
         guard !disableInputOutputFilesValidation else {
             return
         }
-        checkInput(params: parseParams(type: .INPUT), sources: [self.input])
-        checkOutput(params: parseParams(type: .OUTPUT), sources: [self.output, self.outputFile])
+        checkInput(params: parseParams(type: .INPUT_FILE) + parseParams(type: .INPUT_FILE_LIST), sources: [self.input])
+        checkOutput(params: parseParams(type: .OUTPUT_FILE) + parseParams(type: .OUTPUT_FILE_LIST), sources: [self.output, self.outputFile])
     }
     
     func parseParams(type: TypeParams) -> [String] {
         var params = [String]()
-        if let numString = ProcessInfo.processInfo.environment["SCRIPT_\(type.rawValue)_FILE_COUNT"] {
+        if let numString = ProcessInfo.processInfo.environment["SCRIPT_\(type.rawValue)_COUNT"] {
             if let num = Int(numString) {
                 for i in 0...num {
-                    if let param = ProcessInfo.processInfo.environment["SCRIPT_\(type.rawValue)_FILE_\(i)"] {
-                        params.append(resolvePath(path: param))
+                    if let param = ProcessInfo.processInfo.environment["SCRIPT_\(type.rawValue)_\(i)"] {
+                        if param.hasSuffix(".files") || param.hasSuffix(".xcfilelist") || type == .INPUT_FILE_LIST || type == .OUTPUT_FILE_LIST {
+                            if let fileContent = try? String(contentsOfFile: param) {
+                                fileContent.split(separator: "\n").map(String.init).forEach {
+                                    if !$0.hasPrefix("#") {
+                                        params.append(resolvePath(path: $0))
+                                    }
+                                }
+                            }
+                        } else {
+                            params.append(resolvePath(path: param))
+                        }
                     }
                 }
             }

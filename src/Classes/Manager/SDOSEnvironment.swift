@@ -88,20 +88,21 @@ La estructura del .plist deberá ser la siguiente:
     /// Configura los parámetros usados para poder usar las variables de entorno
     ///
     /// - Parameters:
-    ///   - bundle: Bundle desde donde se deben cargar los recursos
+    ///   - keyConfigBundle: Bundle desde donde se deben cargar los recursos
+    ///   - binBundle: Bundle desde donde se debe cargar el fichero binario encriptado
     ///   - file: Fichero encriptado para extraer las variables de entorno. Default: Environments.bin
     ///   - password: Contraseña para desencriptar las variables de entorno. Default: Contraseña generada a partir del paquete de la aplicación
     ///   - environmentKey: Nombre del entorno del que se deberán recuperar los valores de las variables. Default: Production
     ///   - activeLogging: Indica si se debe activar el log del uso de la librería. No se imprimirán logs si el environmentKey es "Production". Default: false
-    @objc public static func configure(bundle: Bundle = Bundle.main, file: String = "Environments.bin", password: String? = nil, environmentKey: String? = nil, activeLogging: Bool = false) {
+    @objc public static func configure(keyConfigBundle: Bundle = Bundle.main, binBundle: Bundle = Bundle.main, file: String = "Environments.bin", password: String? = nil, environmentKey: String? = nil, activeLogging: Bool = false) {
         var key: String
         if let environmentKey = environmentKey {
             key = environmentKey
         } else {
-            key = environmentKeyConfigFile(bundle: bundle)
+            key = environmentKeyConfigFile(bundle: keyConfigBundle)
         }
         sharedInstance.activeLogging(activeLogging: activeLogging)
-        sharedInstance.configure(bundle: bundle, file: file, password: password, environmentKey: key)
+        sharedInstance.configure(bundle: binBundle, file: file, password: password, environmentKey: key)
     }
     
     /// Cambia el actual entorno del que se deben recuperar las variables de entorno
