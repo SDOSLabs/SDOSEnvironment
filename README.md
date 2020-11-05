@@ -59,7 +59,7 @@ Debemos abrir nuestro proyecto en Xcode y seleccionar el proyecto para abrir su 
 https://github.com/SDOSLabs/SDOSEnvironment.git
 ```
 
-En el siguiente paso deberemos seleccionar la versión que queremos instalar. Recomentamos indicar "Up to Next Major" 1.2.0.
+En el siguiente paso deberemos seleccionar la versión que queremos instalar. Recomentamos indicar "Up to Next Major" `1.2.0`.
 
 Por último deberemos indicar el o los targets donde se deberá incluir la librería
 
@@ -197,7 +197,7 @@ Para usar la librería sólo es necesario lanzar la configuración inicial de la
     ```
 
 ## Dependencias
-* [RNCryptor](https://github.com/RNCryptor/RNCryptor) - 5.x
+* [RNCryptor](https://github.com/RNCryptor/RNCryptor) - ~> 5.1
 
 ## Referencias
 * https://github.com/SDOSLabs/SDOSEnvironment

@@ -1,4 +1,4 @@
-## [HEAD]
+## [1.2.0 Support Swift Package Manager](https://github.com/SDOSLabs/SDOSEnvironment/tree/1.2.1)
 
 - Add support for Swift Package Manager
 
