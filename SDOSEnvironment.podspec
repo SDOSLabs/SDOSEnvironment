@@ -7,7 +7,7 @@ Pod::Spec.new do |spec|
   spec.license      = { :type => 'MIT' }
   spec.homepage     = 'https://github.com/SDOSLabs/SDOSEnvironment'
   spec.summary      = 'Librería para el manejo de variables de entorno'
-  spec.source       = { :git => "https://github.com/SDOSLabs/SDOSEnvironment.git", :tag => "v#{spec.version}" }
+  spec.source       = { :git => "https://github.com/SDOSLabs/SDOSEnvironment.git", :tag => "#{spec.version}" }
   spec.framework    = ['Foundation']
   spec.requires_arc = true
   spec.swift_version = '5.0'
@@ -18,6 +18,6 @@ Pod::Spec.new do |spec|
     s1.source_files = ['src/Classes/*{*.m,*.h,*.swift}', 'src/Classes/**/*{*.m,*.h,*.swift}']
   end
   
-  spec.dependency 'RNCryptor', '>= 5.1.0'
+  spec.dependency 'RNCryptor', '~> 5.1'
 
 end
