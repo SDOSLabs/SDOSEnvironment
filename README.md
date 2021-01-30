@@ -162,7 +162,7 @@ El script tiene los siguientes parámetros que pueden incluirse en base a las ne
 |`-b [valor]`|[x]*|Bundle identifier de la aplicación. Se usará para generar la contraseña del fichero encriptado en base a éste|`${PRODUCT_BUNDLE_IDENTIFIER}` // `es.sdos.bundleid`|
 |`-output-file [valor]`|[x]|Ruta del fichero autogenerado de salida. Debe incluir el nombre del fichero a generar|`${SRCROOT}/main/resources/generated/EnvironmentGenerated.swift`|
 |`-validate-environment [valor]`||String correspondiente al entorno que se quiere validar. La validación comprobará que todas las claves indicadas en el fichero tengan un valor para el entorno definido|`${SDOSEnvironment}` // `Debug`|
-|`-p [valor]`|[x]*|Contraseña usada para encriptar el fichero. Éste paraámetro no tendrá en cuenta si se ha indicado el parámetro `-b`|`Aa123456`|
+|`-p [valor]`|[x]*|Contraseña usada para encriptar el fichero. Éste parámetro no tendrá en cuenta si se ha indicado el parámetro `-b`|`Aa123456`|
 |`--disable-input-output-files-validation`||Deshabilita la validación de los inputs y outputs files. Usar sólo para dar compatibilidad a `Legacy Build System`|
 |`--unlock-files`||Indica que los ficheros de salida no se deben bloquear en el sistema|
 |`-access-level`||Indica que el modificador de acceso al sistema| `public`|
