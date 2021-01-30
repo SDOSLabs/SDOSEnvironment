@@ -132,7 +132,7 @@ La estructura del .plist deberá ser la siguiente:
         if let key = pwd {
             password = key
         } else {
-            password = generateDefaultPassword()
+            password = generateDefaultPassword(bundle: bundle)
         }
         //decrypt the saved environments.bin to get environments.json contents
         let environmentsFilePath = bundle.path(forResource: file, ofType: "")

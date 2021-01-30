@@ -1,4 +1,8 @@
-## [1.2.0 Support Swift Package Manager](https://github.com/SDOSLabs/SDOSEnvironment/tree/1.2.1)
+## [1.2.1 Fix bundle problem for generate password from bundle](https://github.com/SDOSLabs/SDOSEnvironment/tree/1.2.1)
+
+- Fix bundle problem for generate password from bundle
+
+## [1.2.0 Support Swift Package Manager](https://github.com/SDOSLabs/SDOSEnvironment/tree/1.2.0)
 
 - Add support for Swift Package Manager
 
