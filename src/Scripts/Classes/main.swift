@@ -249,7 +249,7 @@ class ScriptAction {
             
             result.append(contentsOf: "")
             result.append(contentsOf: "/// This Environment is generated and contains static references to \(keys.count) variables\n")
-            result.append(contentsOf: "/// Reference file: \(fileRelativePath.replacingOccurrences(of: pwd, with: ""))\n")
+            result.append(contentsOf: "/// Reference file: \(fileRelativePath.replacingOccurrences(of: pwd, with: "${SRCROOT}"))\n")
             result.append(contentsOf: "\(accessLevelFinal)struct Environment {\n")
             result.append(contentsOf: "\tprivate init() { }\n")
             
@@ -441,24 +441,37 @@ extension ScriptAction {
         }
     }
     
-    func resolvePath(path: String) -> String {
-        var arrayComponents: [String] = path.components(separatedBy: "/").reversed()
-        var numComponentsToDelete = 0
-        arrayComponents = arrayComponents.compactMap { item -> String? in
-            if item == ".." {
-                numComponentsToDelete += 1
-                return nil
-            } else {
-                if numComponentsToDelete != 0 {
-                    numComponentsToDelete -= 1
+    func resolvePath(path: String, expandVariables: Bool = true) -> String {
+            var arrayComponents: [String] = path.components(separatedBy: "/").reversed()
+            var numComponentsToDelete = 0
+            arrayComponents = arrayComponents.compactMap { item -> String? in
+                if item == ".." {
+                    numComponentsToDelete += 1
+                    return nil
+                } else if item == "." {
                     return nil
                 } else {
-                    return item
+                    if numComponentsToDelete != 0 {
+                        numComponentsToDelete -= 1
+                        return nil
+                    } else {
+                        return item
+                    }
                 }
             }
+            var result = arrayComponents.reversed().joined(separator: "/")
+            if expandVariables {
+                if let projectDir = ProcessInfo.processInfo.environment["PROJECT_DIR"] {
+                    result = result.replacingOccurrences(of: "${PROJECT_DIR}", with: projectDir).replacingOccurrences(of: "$PROJECT_DIR", with: projectDir).replacingOccurrences(of: "$(PROJECT_DIR)", with: projectDir)
+                }
+                
+                if let srcRoot = ProcessInfo.processInfo.environment["SRCROOT"] {
+                    result = result.replacingOccurrences(of: "${SRCROOT}", with: srcRoot).replacingOccurrences(of: "$SRCROOT", with: srcRoot).replacingOccurrences(of: "$(SRCROOT)", with: srcRoot)
+                }
+            }
+            
+            return result
         }
-        return arrayComponents.reversed().joined(separator: "/")
-    }
 }
 
 extension ScriptAction {
