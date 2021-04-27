@@ -38,7 +38,7 @@ source 'https://github.com/CocoaPods/Specs.git' #Cocoapods source
 
 Añadir la dependencia al `Podfile`:
 ```ruby
-pod 'SDOSEnvironment', '~>1.2.0' 
+pod 'SDOSEnvironment', '~>1.3.0' 
 ```
 
 ### Swift Package Manager
@@ -59,7 +59,7 @@ Debemos abrir nuestro proyecto en Xcode y seleccionar el proyecto para abrir su 
 https://github.com/SDOSLabs/SDOSEnvironment.git
 ```
 
-En el siguiente paso deberemos seleccionar la versión que queremos instalar. Recomentamos indicar "Up to Next Major" `1.2.0`.
+En el siguiente paso deberemos seleccionar la versión que queremos instalar. Recomentamos indicar "Up to Next Major" `1.3.0`.
 
 Por último deberemos indicar el o los targets donde se deberá incluir la librería
 
@@ -69,7 +69,7 @@ Incluir la dependencia en el bloque `dependencies`:
 
 ``` swift
 dependencies: [
-    .package(url: "https://github.com/SDOSLabs/SDOSEnvironment.git", .upToNextMajor(from: "1.2.0"))
+    .package(url: "https://github.com/SDOSLabs/SDOSEnvironment.git", .upToNextMajor(from: "1.3.0"))
 ]
 ```
 
@@ -94,7 +94,7 @@ Esta librería la usaremos en la `Build Phase` de nuestro proyecto. El script de
 
 ``` swift
 dependencies: [
-    .package(url: "https://github.com/SDOSLabs/SDOSEnvironment.git", .upToNextMajor(from: "1.2.0"))
+    .package(url: "https://github.com/SDOSLabs/SDOSEnvironment.git", .upToNextMajor(from: "1.3.0"))
 ]
 ```
 
@@ -132,13 +132,13 @@ El *script de encriptación y generación de código* no se incluye en el binari
 
     **Si la instalación es con cocoapods**
     ```sh
-    "${PODS_ROOT}/SDOSEnvironment/src/Scripts/SDOSEnvironment" -b ${PRODUCT_BUNDLE_IDENTIFIER} -i "${SRCROOT}/main/resources/Environments.plist" -output-bin "${SRCROOT}/main/resources/generated/Environments.bin" -output-file "${SRCROOT}/main/resources/generated/EnvironmentGenerated.swift" -validate-environment ${SDOSEnvironment}
+    "${PODS_ROOT}/SDOSEnvironment/src/Scripts/SDOSEnvironment" -b ${PRODUCT_BUNDLE_IDENTIFIER} -i "${SRCROOT}/main/resources/Environments.plist" --output-bin "${SRCROOT}/main/resources/generated/Environments.bin" --output-file "${SRCROOT}/main/resources/generated/EnvironmentGenerated.swift" --validate-environment ${SDOSEnvironment}
     ```
     **Si la instalación es con Swift Package Manager**
     ```sh
     SPM_PATH="${SRCROOT}/Autogenerate"
 
-    (cd $SPM_PATH && xcrun --sdk macosx swift run SDOSEnvironment -b ${PRODUCT_BUNDLE_IDENTIFIER} -i "${SRCROOT}/main/resources/Environments.plist" -output-bin "${SRCROOT}/main/resources/generated/Environments.bin" -output-file "${SRCROOT}/main/resources/generated/EnvironmentGenerated.swift" -validate-environment ${SDOSEnvironment}")
+    (cd $SPM_PATH && xcrun --sdk macosx swift run SDOSEnvironmentScript -b ${PRODUCT_BUNDLE_IDENTIFIER} -i "${SRCROOT}/main/resources/Environments.plist" --output-bin "${SRCROOT}/main/resources/generated/Environments.bin" --output-file "${SRCROOT}/main/resources/generated/EnvironmentGenerated.swift" --validate-environment ${SDOSEnvironment}")
     ```
     > Los valores del script pueden cambiarse en función de las necesidades del proyecto
 6. Añadir `${SRCROOT}/main/resources/Environments.plist` al apartado `Input Files`. **No poner comillas**
@@ -149,23 +149,24 @@ El *script de encriptación y generación de código* no se incluye en el binari
 #### Qué hace el script
 En cada compilación, si se ha modificado el fichero `${SRCROOT}/main/resources/Environments.plist` el `Build Phase` se volverá a ejecutar realizando la siguientes labores:
 * Validar el fichero indicado en el parámetro `-i` y encriptarlo en base al parámetro `-b`. El script usa está información para generar una contraseña de encriptación. **IMPORTANTE**: este valor debe ser el mismo al realizar la configuración en el código. En caso contrario la librería no podrá desencriptar el fichero
-* Generar el fichero con las variables encriptadas en la ruta `-output-bin`
-* Generar el fichero con el código swift en la ruta `-output-file`
-* Validar si todas las variables tienen el entorno indicado en el parámetro `-validate-environment`
+* Generar el fichero con las variables encriptadas en la ruta `--output-bin`
+* Generar el fichero con el código swift en la ruta `--output-file`
+* Validar si todas las variables tienen el entorno indicado en el parámetro `--validate-environment`
 
 El script tiene los siguientes parámetros que pueden incluirse en base a las necesidades del proyecto:
 
 |Parámetro|Obligatorio|Descripción|Ejemplo|
 |---------|-----------|-----------|-------|
 |`-i [valor]`|[x]|Ruta del fichero de entrada. Debe ser un .plist|`${SRCROOT}/main/resources/Environments.plist`|
-|`-output-bin [valor]`|[x]|Ruta del fichero encriptado de salida. Debe incluir el nombre del fichero a generar|`${SRCROOT}/main/resources/generated/Environments.bin`|
+|`--output-bin [valor]`|[x]|Ruta del fichero encriptado de salida. Debe incluir el nombre del fichero a generar|`${SRCROOT}/main/resources/generated/Environments.bin`|
 |`-b [valor]`|[x]*|Bundle identifier de la aplicación. Se usará para generar la contraseña del fichero encriptado en base a éste|`${PRODUCT_BUNDLE_IDENTIFIER}` // `es.sdos.bundleid`|
-|`-output-file [valor]`|[x]|Ruta del fichero autogenerado de salida. Debe incluir el nombre del fichero a generar|`${SRCROOT}/main/resources/generated/EnvironmentGenerated.swift`|
-|`-validate-environment [valor]`||String correspondiente al entorno que se quiere validar. La validación comprobará que todas las claves indicadas en el fichero tengan un valor para el entorno definido|`${SDOSEnvironment}` // `Debug`|
+|`--output-file [valor]`|[x]|Ruta del fichero autogenerado de salida. Debe incluir el nombre del fichero a generar|`${SRCROOT}/main/resources/generated/EnvironmentGenerated.swift`|
+|`--validate-environment [valor]`||String correspondiente al entorno que se quiere validar. La validación comprobará que todas las claves indicadas en el fichero tengan un valor para el entorno definido|`${SDOSEnvironment}` // `Debug`|
 |`-p [valor]`|[x]*|Contraseña usada para encriptar el fichero. Éste parámetro no tendrá en cuenta si se ha indicado el parámetro `-b`|`Aa123456`|
 |`--disable-input-output-files-validation`||Deshabilita la validación de los inputs y outputs files. Usar sólo para dar compatibilidad a `Legacy Build System`|
 |`--unlock-files`||Indica que los ficheros de salida no se deben bloquear en el sistema|
-|`-access-level`||Indica que el modificador de acceso al sistema| `public`|
+|`--access-level`||Indica que el modificador de acceso al sistema| `public`|
+|`--struct-name`||Indica el nombre de la estructura que contiene las constantes. Por defecto es `Environment`| `public`|
 ***Uno de los dos valores debe estar en la ejecución del script**
 
 > Puedes consultar la ayuda completa ejecutando `./SDOSEnvironment help` en el terminal

@@ -224,7 +224,9 @@ La estructura del .plist deberá ser la siguiente:
             characters.forEach { (character) in
                 var char = character.asciiValue ?? 0
                 char += 7
-                bytes.append(char)
+                if String(bytes: [char], encoding: .utf8) != nil {
+                    bytes.append(char)
+                }
             }
         }
         if let string = String(bytes: bytes, encoding: .utf8) {

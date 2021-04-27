@@ -31,6 +31,7 @@ class ScriptAction {
     var validateEnvironment: String?
     var disableInputOutputFilesValidation = false
     var unlockFiles = false
+    var structName = "Environment"
     
     var parameters = [ConsoleParameter]()
     
@@ -79,6 +80,16 @@ class ScriptAction {
         }
         parameters.append(parameter2)
         
+        let parameter2_1 = ConsoleParameter(numArgs: 1, option: "--output-bin") { values in
+            var result = values[1]
+            if let pwd = self.pwd, !result.hasPrefix("/") {
+                result = "\(pwd)/\(result)"
+            }
+            self.output = result
+            return true
+        }
+        parameters.append(parameter2_1)
+        
         let parameter3 = ConsoleParameter(numArgs: 1, option: "-b") { values in
             let result = values[1]
             self.password = self.generatePassword(bundle: result)
@@ -105,12 +116,29 @@ class ScriptAction {
         }
         parameters.append(parameter5)
         
+        let parameter5_1 = ConsoleParameter(numArgs: 1, option: "--output-file") { values in
+            var result = values[1]
+            if let pwd = self.pwd, !result.hasPrefix("/") {
+                result = "\(pwd)/\(result)"
+            }
+            self.outputFile = result
+            return true
+        }
+        parameters.append(parameter5_1)
+        
         let parameter6 = ConsoleParameter(numArgs: 1, option: "-validate-environment") { values in
             let result = values[1]
             self.validateEnvironment = result
             return true
         }
         parameters.append(parameter6)
+        
+        let parameter6_1 = ConsoleParameter(numArgs: 1, option: "--validate-environment") { values in
+            let result = values[1]
+            self.validateEnvironment = result
+            return true
+        }
+        parameters.append(parameter6_1)
         
         let parameter7 = ConsoleParameter(numArgs: 0, option: "--disable-input-output-files-validation") { values in
             self.disableInputOutputFilesValidation = true
@@ -131,6 +159,20 @@ class ScriptAction {
         }
         parameters.append(parameter9)
         
+        let parameter9_1 = ConsoleParameter(numArgs: 1, option: "--access-level") { values in
+            let result = values[1]
+            self.accessLevel = result
+            return true
+        }
+        parameters.append(parameter9_1)
+        
+        let parameter10 = ConsoleParameter(numArgs: 1, option: "--struct-name") { values in
+            let result = values[1]
+            self.structName = result
+            return true
+        }
+        parameters.append(parameter10)
+        
     }
     
     func generatePassword(bundle: String) -> String {
@@ -140,7 +182,9 @@ class ScriptAction {
         characters.forEach { (character) in
             var char = character.asciiValue ?? 0
             char += 7
-            bytes.append(char)
+            if String(bytes: [char], encoding: .utf8) != nil {
+                bytes.append(char)
+            }
         }
         if let string = String(bytes: bytes, encoding: .utf8) {
             password = string
@@ -172,11 +216,12 @@ class ScriptAction {
         print("-output-bin Ruta del fichero encriptado de salida. Debe incluir el nombre del fichero a generar (Ejemplo: environments.bin)")
         print("-b Bundle identifier de la aplicación. Se usará para generar la contraseña del fichero encriptado en base a éste")
         print("-p Contraseña usada para encriptar el fichero. Éste paraámetro no tendrá en cuenta si se ha indicado el parámetro -b")
-        print("-output-file Ruta del fichero autogenerado de salida. Debe incluir el nombre del fichero a generar (Ejemplo: SDOSEnvironment.swift)")
-        print("-validate-environment String correspondiente al entorno que se quiere validar. La validación comprobará que todas las claves indicadas en el fichero tengan un valor para el entorno definido")
+        print("--output-file Ruta del fichero autogenerado de salida. Debe incluir el nombre del fichero a generar (Ejemplo: SDOSEnvironment.swift)")
+        print("--validate-environment String correspondiente al entorno que se quiere validar. La validación comprobará que todas las claves indicadas en el fichero tengan un valor para el entorno definido")
         print("--disable-input-output-files-validation Deshabilita la validación de los inputs y outputs files. Usar sólo para dar compatibilidad a Legacy Build System")
         print("--unlock-files Indica que los ficheros de salida no se deben bloquear en el sistema")
-        print("-access-level Indica que el modificador de acceso al sistema")
+        print("--access-level Indica que el modificador de acceso al sistema")
+        print("--struct-name Indica el nombre de la estructura que contiene las constantes. Por defecto es \"Environment\"")
         exit(1)
     }
     
@@ -250,7 +295,7 @@ class ScriptAction {
             result.append(contentsOf: "")
             result.append(contentsOf: "/// This Environment is generated and contains static references to \(keys.count) variables\n")
             result.append(contentsOf: "/// Reference file: \(fileRelativePath.replacingOccurrences(of: pwd, with: "${SRCROOT}"))\n")
-            result.append(contentsOf: "\(accessLevelFinal)struct Environment {\n")
+            result.append(contentsOf: "\(accessLevelFinal)struct \(structName) {\n")
             result.append(contentsOf: "\tprivate init() { }\n")
             
             for item in keys {
