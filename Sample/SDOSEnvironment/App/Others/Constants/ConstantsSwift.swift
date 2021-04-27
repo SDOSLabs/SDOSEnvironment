@@ -10,22 +10,22 @@ import Foundation
 
 @objc class ConstantsSwift: NSObject {
     @objc static func getWSBaseUrl() -> String {
-        return Environment.wsBaseUrl
+        return ConstantsEnvironment.wsBaseUrl
     }
     
     @objc static func getEnvironmentDescription() -> String {
-        return Environment.environmentDescription
+        return ConstantsEnvironment.environmentDescription
     }
     
     @objc static func getGoogleAnalyticsKey() -> String {
-        return Environment.googleAnalyticsKey
+        return ConstantsEnvironment.googleAnalyticsKey
     }
     
     @objc static func getOctopushMode() -> String {
-        return Environment.octopushMode
+        return ConstantsEnvironment.octopushMode
     }
     
     @objc static func getShowSelectedEnvironmentsOnLoad() -> String {
-        return Environment.showSelectedEnvironmentsOnLoad
+        return ConstantsEnvironment.showSelectedEnvironmentsOnLoad
     }
 }

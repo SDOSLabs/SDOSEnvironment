@@ -56,6 +56,10 @@
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
+            argument = "-struct-name ConstantsEnvironment"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
             argument = "-output-file ${PROJECT_DIR}/App/Others/Autogenerate/EnvironmentGenerated.swift"
             isEnabled = "YES">
          </CommandLineArgument>
@@ -64,7 +68,7 @@
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "-i ${PROJECT_DIR}/App/Configuration/Properties/Environments.plist"
+            argument = "-i ${SRCROOT}/App/Configuration/Properties/Environments.plist"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
@@ -88,7 +92,7 @@
          </EnvironmentVariable>
          <EnvironmentVariable
             key = "SCRIPT_INPUT_FILE_0"
-            value = "${PROJECT_DIR}/App/Configuration/Properties/Environments.plist"
+            value = "${SRCROOT}/App/Configuration/Properties/Environments.plist"
             isEnabled = "YES">
          </EnvironmentVariable>
          <EnvironmentVariable
@@ -98,12 +102,12 @@
          </EnvironmentVariable>
          <EnvironmentVariable
             key = "SCRIPT_OUTPUT_FILE_0"
-            value = "${PROJECT_DIR}/App/Configuration/Properties/Environments.bin"
+            value = "${SRCROOT}/App/Configuration/Properties/Environments.bin"
             isEnabled = "YES">
          </EnvironmentVariable>
          <EnvironmentVariable
             key = "SCRIPT_OUTPUT_FILE_1"
-            value = "${PROJECT_DIR}/App/Others/Autogenerate/EnvironmentGenerated.swift"
+            value = "${SRCROOT}/App/Others/Autogenerate/EnvironmentGenerated.swift"
             isEnabled = "YES">
          </EnvironmentVariable>
       </EnvironmentVariables>

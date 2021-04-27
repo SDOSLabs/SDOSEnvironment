@@ -8,8 +8,8 @@ import Foundation
 import SDOSEnvironment
 
 /// This Environment is generated and contains static references to 5 variables
-/// Reference file: /Users/lukanor/Documents/Projects/Github/SDOSEnvironment/Sample/SDOSEnvironment/App/Configuration/Properties/Environments.plist
-public struct Environment {
+/// Reference file: /App/Configuration/Properties/Environments.plist
+public struct ConstantsEnvironment {
 	private init() { }
 	/// Variable reference: EnvironmentDescription
 	public static var environmentDescription: String { return SDOSEnvironment.getValue(key: "EnvironmentDescription") }

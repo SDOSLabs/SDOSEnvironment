@@ -722,7 +722,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/../../../src/Scripts/SDOSEnvironment\" -b ${PRODUCT_BUNDLE_IDENTIFIER} -output-bin \"${SRCROOT}/Pods/../App/Configuration/Properties/Environments.bin\" -output-file \"${PROJECT_DIR}/App/Others/Autogenerate/EnvironmentGenerated.swift\" -i \"${PROJECT_DIR}/App/Configuration/Properties/Environments.plist\" -validate-environment ${SDOSEnvironment} -access-level public\n";
+			shellScript = "\"${PODS_ROOT}/../../../src/Scripts/SDOSEnvironment\" -b ${PRODUCT_BUNDLE_IDENTIFIER} -output-bin \"${SRCROOT}/Pods/../App/Configuration/Properties/Environments.bin\" -output-file \"${PROJECT_DIR}/App/Others/Autogenerate/EnvironmentGenerated.swift\" -i \"${PROJECT_DIR}/App/Configuration/Properties/Environments.plist\" -validate-environment ${SDOSEnvironment} -access-level public --struct-name \"ConstantsEnvironment\"\n";
 		};
 		2940E4372231185B0057986A /* Xcode Version */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -807,7 +807,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "xcrun --sdk macosx swift run SDOSEnvironmentScript -b ${PRODUCT_BUNDLE_IDENTIFIER} -output-bin \"${SRCROOT}/Pods/../App/Configuration/Properties/Environments.bin\" -output-file \"${PROJECT_DIR}/App/Others/Autogenerate/EnvironmentGenerated.swift\" -i \"${PROJECT_DIR}/App/Configuration/Properties/Environments.plist\" -validate-environment ${SDOSEnvironment} -access-level public\n\n";
+			shellScript = "xcrun --sdk macosx swift run SDOSEnvironmentScript -b ${PRODUCT_BUNDLE_IDENTIFIER} -output-bin \"${SRCROOT}/Pods/../App/Configuration/Properties/Environments.bin\" -output-file \"${PROJECT_DIR}/App/Others/Autogenerate/EnvironmentGenerated.swift\" -i \"${PROJECT_DIR}/App/Configuration/Properties/Environments.plist\" --validate-environment ${SDOSEnvironment} --access-level public --struct-name \"ConstantsEnvironment\"\n";
 		};
 		606EB21AE676E7A25EDD1A28 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;

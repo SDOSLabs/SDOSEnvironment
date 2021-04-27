@@ -1,3 +1,14 @@
+## [HEAD]
+
+- Añadido nuevo modificador `--struct-name` que permite modificar el nombre de la estructura que contiene las constantes. Esto es útil para no pisar el nombre del property wrapper `Environment` proporcionado por `SwiftUI`
+- Change parameters keys:
+  - `-output-bin` to `--output-bin`
+  - `-output-file` to `--output-file`
+  - `-validate-environment` to `--validate-environment`
+  - `-access-level` to `--access-level`
+
+- Arreglo en la generación de la contraseña por defecto con algunos caracteres
+
 ## [1.2.1 Fix bundle problem for generate password from bundle](https://github.com/SDOSLabs/SDOSEnvironment/tree/1.2.1)
 
 - Fix bundle problem for generate password from bundle
