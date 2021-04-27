@@ -1,13 +1,13 @@
-## [HEAD]
+## [1.3.0 Add new parameter `--struct-name`. Fix default password generation problems](https://github.com/SDOSLabs/SDOSEnvironment/tree/1.3.0)
 
-- Añadido nuevo modificador `--struct-name` que permite modificar el nombre de la estructura que contiene las constantes. Esto es útil para no pisar el nombre del property wrapper `Environment` proporcionado por `SwiftUI`
+- Add new parameter `--struct-name` which allows modifying the name of the structure containing the constants. This is useful to avoid stepping on the name of the property wrapper `Environment` provided by `SwiftUI`.
 - Change parameters keys:
   - `-output-bin` to `--output-bin`
   - `-output-file` to `--output-file`
   - `-validate-environment` to `--validate-environment`
   - `-access-level` to `--access-level`
 
-- Arreglo en la generación de la contraseña por defecto con algunos caracteres
+- Fix in the generation of the default password with some characters
 
 ## [1.2.1 Fix bundle problem for generate password from bundle](https://github.com/SDOSLabs/SDOSEnvironment/tree/1.2.1)
 
