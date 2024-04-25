@@ -38,7 +38,7 @@ source 'https://github.com/CocoaPods/Specs.git' #Cocoapods source
 
 Añadir la dependencia al `Podfile`:
 ```ruby
-pod 'SDOSEnvironment', '~>1.3.0' 
+pod 'SDOSEnvironment', '~>1.4.0' 
 ```
 
 ### Swift Package Manager
@@ -59,7 +59,7 @@ Debemos abrir nuestro proyecto en Xcode y seleccionar el proyecto para abrir su 
 https://github.com/SDOSLabs/SDOSEnvironment.git
 ```
 
-En el siguiente paso deberemos seleccionar la versión que queremos instalar. Recomentamos indicar "Up to Next Major" `1.3.0`.
+En el siguiente paso deberemos seleccionar la versión que queremos instalar. Recomentamos indicar "Up to Next Major" `1.4.0`.
 
 Por último deberemos indicar el o los targets donde se deberá incluir la librería
 
@@ -69,7 +69,7 @@ Incluir la dependencia en el bloque `dependencies`:
 
 ``` swift
 dependencies: [
-    .package(url: "https://github.com/SDOSLabs/SDOSEnvironment.git", .upToNextMajor(from: "1.3.0"))
+    .package(url: "https://github.com/SDOSLabs/SDOSEnvironment.git", .upToNextMajor(from: "1.4.0"))
 ]
 ```
 
@@ -94,7 +94,7 @@ Esta librería la usaremos en la `Build Phase` de nuestro proyecto. El script de
 
 ``` swift
 dependencies: [
-    .package(url: "https://github.com/SDOSLabs/SDOSEnvironment.git", .upToNextMajor(from: "1.3.0"))
+    .package(url: "https://github.com/SDOSLabs/SDOSEnvironment.git", .upToNextMajor(from: "1.4.0"))
 ]
 ```
 

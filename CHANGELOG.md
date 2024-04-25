@@ -1,3 +1,6 @@
+## [1.4.0 Privacy](https://github.com/SDOSLabs/SDOSEnvironment/tree/1.4.0)
+- Incluido fichero `PrivacyInfo.xcprivacy` requerido por Apple: https://developer.apple.com/documentation/bundleresources/privacy_manifest_files/describing_use_of_required_reason_api
+
 ## [1.3.0 Add new parameter `--struct-name`. Fix default password generation problems](https://github.com/SDOSLabs/SDOSEnvironment/tree/1.3.0)
 
 - Add new parameter `--struct-name` which allows modifying the name of the structure containing the constants. This is useful to avoid stepping on the name of the property wrapper `Environment` provided by `SwiftUI`.
