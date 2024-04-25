@@ -1,9 +1,9 @@
 PODS:
   - RNCryptor (5.1.0)
-  - SDOSEnvironment (1.2.1):
+  - SDOSEnvironment (1.4.0):
     - RNCryptor (~> 5.1)
-    - SDOSEnvironment/SDOSEnvironment (= 1.2.1)
-  - SDOSEnvironment/SDOSEnvironment (1.2.1):
+    - SDOSEnvironment/SDOSEnvironment (= 1.4.0)
+  - SDOSEnvironment/SDOSEnvironment (1.4.0):
     - RNCryptor (~> 5.1)
 
 DEPENDENCIES:
@@ -19,8 +19,8 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   RNCryptor: a369134686cd2ad391323cc856b62e591193ba79
-  SDOSEnvironment: 6df87854bad7b87c023ebfb75de60e63a676fe94
+  SDOSEnvironment: 803217aa989b6410a15ca36c542b1747d737ad3b
 
-PODFILE CHECKSUM: c6667814a777a84a7a098c5559a49e2a21e6aae9
+PODFILE CHECKSUM: 6daf266cfcd752dd55db01064885e73aad254e1c
 
-COCOAPODS: 1.10.1
+COCOAPODS: 1.14.3

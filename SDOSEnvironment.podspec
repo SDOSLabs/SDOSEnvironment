@@ -1,6 +1,8 @@
-@version = "1.3.0"
+@version = "1.4.0"
 Pod::Spec.new do |spec|
-  spec.platform     = :ios, '9.0'
+  spec.platform     = :ios, '12.0'
+  spec.ios.deployment_target   = '12.0'
+  spec.osx.deployment_target   = '11.0'
   spec.name         = 'SDOSEnvironment'
   spec.authors      = 'SDOS'
   spec.version      = @version
@@ -11,11 +13,12 @@ Pod::Spec.new do |spec|
   spec.framework    = ['Foundation']
   spec.requires_arc = true
   spec.swift_version = '5.0'
-
+  
   spec.preserve_paths = "src/Scripts/SDOSEnvironment"
   spec.subspec 'SDOSEnvironment' do |s1|
     s1.preserve_paths = 'src/Classes/*'
     s1.source_files = ['src/Classes/*{*.m,*.h,*.swift}', 'src/Classes/**/*{*.m,*.h,*.swift}']
+    s1.resource_bundles = {'SDOSEnvironment' => ['src/Classes/Manager/Privacyinfo.xcprivacy']}
   end
   
   spec.dependency 'RNCryptor', '~> 5.1'
